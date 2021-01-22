@@ -201,6 +201,7 @@ func dashboardWidgetBillboardSchemaElem() *schema.Resource {
 				Optional:    true,
 				Description: "The warning threshold value.",
 			},
+			"linked_entity_guids": dashboardWidgetLinkedEntityGUIDsSchema(),
 		},
 	}
 }
@@ -244,9 +245,11 @@ func dashboardWidgetGraphSchemaElem() *schema.Resource {
 				Required:    true,
 				Description: "A title for the widget.",
 			},
+			"linked_entity_guids": dashboardWidgetLinkedEntityGUIDsSchema(),
 		},
 	}
 }
+
 func dashboardWidgetMarkdownSchemaElem() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
@@ -285,7 +288,19 @@ func dashboardWidgetMarkdownSchemaElem() *schema.Resource {
 				Required:    true,
 				Description: "A title for the widget.",
 			},
+			"linked_entity_guids": dashboardWidgetLinkedEntityGUIDsSchema(),
 		},
+	}
+}
+
+func dashboardWidgetLinkedEntityGUIDsSchema() *schema.Schema {
+	return &schema.Schema{
+		Type: schema.TypeList,
+		Elem: &schema.Schema{
+			Type: schema.TypeString,
+		},
+		Optional:    true,
+		Description: "Related entities. Currently only supports Dashboard entities, but may allow other cases in the future.",
 	}
 }
 
